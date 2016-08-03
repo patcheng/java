@@ -47,6 +47,9 @@ when 'debian'
 when 'smartos'
   node.default['java']['java_home'] = '/opt/local/java/sun6'
   node.default['java']['openjdk_packages'] = ["sun-jdk#{node['java']['jdk_version']}", "sun-jre#{node['java']['jdk_version']}"]
+when 'suse'
+    node.default['java']['java_home'] = "/usr/lib#{node['kernel']['machine'] == 'x86_64' ? '64' : ''}/jvm/java-1.#{node['java']['jdk_version']}.0-openjdk-1.#{node['java']['jdk_version']}.0/jre"
+    node.default['java']['openjdk_packages'] = ["java-1_#{node['java']['jdk_version']}_0-openjdk"]
 when 'windows'
   # Do nothing otherwise we will fall through to the else and set java_home to an invalid path, causing the installer to popup a dialog
 when 'mac_os_x'
